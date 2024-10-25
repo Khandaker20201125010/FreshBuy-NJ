@@ -34,7 +34,7 @@ export default function RootLayout({
        <div className="min-h-screen">
        {children}
        </div>
-       <div className="min-h-full">
+       <div className="min-h-full mt-40">
        <Footer />
        </div>
       </body>
