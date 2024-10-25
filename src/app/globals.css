@@ -17,3 +17,14 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+.logo {
+  background-image: url("../../public/images/logo.png");
+  width: 175px; /* Adjust as needed */
+  height: 60px; /* Adjust as needed */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position:right ; /* Center the background image */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  position: relative; /* Allow absolute positioning of children */
+}
