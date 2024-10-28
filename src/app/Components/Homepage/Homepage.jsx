@@ -4,10 +4,7 @@ const Homepage = () => {
     return (
         <div>
             <Banner />
-            <Services />
-         
-            
-            
+            <Services />  
         </div>
     );
 };

@@ -1,7 +1,9 @@
 "use client"; // Ensure this is at the top of the file
 
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaShoppingBag } from "react-icons/fa";
@@ -11,11 +13,16 @@ import { SlMenu } from "react-icons/sl";
 const NavBar = () => {
   const pathname = usePathname(); // Get the current path
   const [click, setClick] = useState(false);
+  const session =  useSession();
+  const router = useRouter();
 
   const handleClick = () => setClick(!click);
   const closeMenu = () => {
     setClick(false);
   };
+  const handler = () => {
+   router.push('/api/auth/signin');
+  }
   const links = (
     <>
       <li>
@@ -30,12 +37,22 @@ const NavBar = () => {
       </li>
       <li>
         <Link
-          href="/login"
+          href="/gallery"
           className={`font-bold text-lg ${
-            pathname === "/login" ? "text-green-600" : "text-black"
+            pathname === "/gallery" ? "text-green-600" : "text-black"
           } hover:text-green-600`}
         >
-          Login
+         Add
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/allproduct"
+          className={`font-bold text-lg ${
+            pathname === "/allproduct" ? "text-green-600" : "text-black"
+          } hover:text-green-600`}
+        >
+         Product management 
         </Link>
       </li>
     </>
@@ -125,9 +142,13 @@ const NavBar = () => {
               <FaShoppingBag size={25} />
             </button>
           </div>
-          <a className="btn btn-outline px-8 btn-sm glass bg-green-600 hover:bg-green-500  border-green-600 text-black">
-            Button
-          </a>
+          {!session ?<button onClick={handler} className="btn btn-outline px-8 btn-sm glass bg-green-600 hover:bg-green-500  border-green-600 text-black">
+            Login
+          </button>: <button onClick={handler} className="btn btn-outline px-8 btn-sm glass bg-green-600 hover:bg-green-500  border-green-600 text-black">Logout </button>
+          }
+        </div>
+        <div className="ml-2">
+         <Link href="/signup" className="btn btn-outline px-8 btn-sm glass bg-green-600 hover:bg-green-500  border-green-600 text-black">Sign up</Link>
         </div>
       </div>
     </div>

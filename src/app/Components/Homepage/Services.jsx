@@ -1,9 +1,17 @@
 "use client";
-import React from "react";
-import { services } from "../../lib/services";
+import React, { useEffect, useState } from "react";
 import ServicesCard from "../Cards/ServicesCard";
 const Services = () => {
-  console.log(services);
+  const [products, setProducts] = useState([]);
+
+  const fetchProduct = async () => {
+    const response = await fetch("/api/users");
+    const data = await response.json();
+    setProducts(data);
+  };
+  useEffect(() => {
+    fetchProduct();
+  }, []);
   return (
     <div className="text-slate-800 min-h-screen mt-40">
       <div className="text-center container mx-auto">
@@ -16,9 +24,13 @@ const Services = () => {
           the nutrients it needs to function effectively.
         </p>
       </div>
+       <div className="container mx-auto">
+       Total item:{products.length}
+       </div>
       <div className="container mx-auto mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {services.map((service, index) => (
-          <ServicesCard key={service.name || index} services={service} />
+       
+        {products.map((product, index) => (
+          <ServicesCard key={product.name || index} product={product} />
         ))}
       </div>
     </div>
